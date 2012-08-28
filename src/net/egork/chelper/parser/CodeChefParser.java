@@ -53,7 +53,7 @@ public class CodeChefParser implements Parser {
                 String id = nonPastContestParser.advance(false, "</td>");
                 nonPastContestParser.advance(true, "<a href=\"");
                 nonPastContestParser.advance(true, "\">");
-                String name = nonPastContestParser.advance(false, "</a>");
+                String name = StringEscapeUtils.unescapeHtml(nonPastContestParser.advance(false, "</a>"));
                 contests.add(new Description(id, name));
             }
         } catch (ParseException ignored) {
@@ -70,7 +70,7 @@ public class CodeChefParser implements Parser {
 				String id = parser.advance(false, "</td>");
 				parser.advance(true, "<a href=\"");
 				parser.advance(true, "\">");
-				String name = parser.advance(false, "</a>");
+				String name = StringEscapeUtils.unescapeHtml(parser.advance(false, "</a>"));
 				contests.add(new Description(id, name));
 			}
 		} catch (ParseException ignored) {
@@ -121,7 +121,7 @@ public class CodeChefParser implements Parser {
 					taskID = id + " " + parser.advance(false, "\"");
 				}
 				parser.advance(true, "<b>");
-				String name = parser.advance(false, "</b>");
+				String name = StringEscapeUtils.unescapeHtml(parser.advance(false, "</b>"));
 				tasks.add(new Description(taskID, name));
 			} catch (ParseException e) {
 				break;

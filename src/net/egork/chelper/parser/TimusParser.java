@@ -78,7 +78,7 @@ public class TimusParser implements Parser {
 				String id = parser.advance(false, "\">");
 				StringParser prefixParser = new StringParser(prefix);
 				prefixParser.advance(true, "<H3 CLASS=\"title\">");
-				String description = prefixParser.advance(false, "</H3>");
+				String description = StringEscapeUtils.unescapeHtml(prefixParser.advance(false, "</H3>"));
 				contests.add(new Description(id, description));
 			}
 			} catch (ParseException ignored) {}
@@ -111,7 +111,7 @@ public class TimusParser implements Parser {
 			try {
 				parser.advance(true, "<A HREF=\"problem.aspx?space=" + id + "&amp;num=" + index);
 				parser.advance(true, "\">");
-				String description = parser.advance(false, "</A>");
+				String description = StringEscapeUtils.unescapeHtml(parser.advance(false, "</A>"));
 				tasks.add(new Description(id + " " + index++, description));
 			} catch (ParseException e) {
 				break;

@@ -43,6 +43,7 @@ public class ParseDialog extends JDialog {
     private ParseListModel taskModel;
 	private Receiver taskReceiver;
 	private Receiver contestReceiver;
+	private int width = new JTextField(20).getPreferredSize().width;
 
     private ParseDialog(final Project project) {
 		super(null, "Parse Contest", ModalityType.APPLICATION_MODAL);
@@ -108,7 +109,7 @@ public class ParseDialog extends JDialog {
             @Override
             public Dimension getPreferredSize() {
                 Dimension size = super.getPreferredSize();
-                size.height = 300;
+                size.height = 3 * width / 2;
                 return size;
             }
         };
@@ -167,7 +168,7 @@ public class ParseDialog extends JDialog {
             @Override
             public Dimension getPreferredSize() {
                 Dimension size = super.getPreferredSize();
-                size.width = 250;
+                size.width = width;
                 return size;
             }
         };
@@ -190,7 +191,7 @@ public class ParseDialog extends JDialog {
             @Override
             public Dimension getPreferredSize() {
                 Dimension size = super.getPreferredSize();
-                size.width = 250;
+                size.width = width;
                 return size;
             }
         };
@@ -201,9 +202,9 @@ public class ParseDialog extends JDialog {
         contestName = new JTextField();
         dateAndContestName.add(contestName);
         rightPanel.add(dateAndContestName, BorderLayout.NORTH);
-        JPanel buttonPanel = new JPanel(new BorderLayout());
-        buttonPanel.add(contentPanel.getOkButton(), BorderLayout.CENTER);
-        buttonPanel.add(contentPanel.getCancelButton(), BorderLayout.EAST);
+        JPanel buttonPanel = new JPanel(new GridLayout(1, 2));
+        buttonPanel.add(contentPanel.getOkButton());
+        buttonPanel.add(contentPanel.getCancelButton());
         rightPanel.add(buttonPanel, BorderLayout.SOUTH);
         bottomPanel.add(rightPanel);
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
