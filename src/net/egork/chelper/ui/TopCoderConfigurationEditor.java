@@ -8,8 +8,8 @@ import net.egork.chelper.configurations.TopCoderConfiguration;
 import net.egork.chelper.task.TopCoderTask;
 import net.egork.chelper.util.FileCreator;
 import net.egork.chelper.util.FileUtilities;
-import net.egork.chelper.util.Provider;
 import net.egork.chelper.util.Utilities;
+import net.egork.chelper.util.Provider;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

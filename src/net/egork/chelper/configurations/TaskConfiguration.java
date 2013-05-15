@@ -18,9 +18,9 @@ import net.egork.chelper.actions.TopCoderAction;
 import net.egork.chelper.task.Task;
 import net.egork.chelper.ui.TaskConfigurationEditor;
 import net.egork.chelper.util.FileUtilities;
+import net.egork.chelper.util.Utilities;
 import net.egork.chelper.util.InputReader;
 import net.egork.chelper.util.TaskUtilities;
-import net.egork.chelper.util.Utilities;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 

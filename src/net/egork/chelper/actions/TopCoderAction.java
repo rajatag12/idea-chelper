@@ -11,6 +11,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import net.egork.chelper.task.TopCoderTask;
 import net.egork.chelper.topcoder.CHelperArenaPlugin;
+import net.egork.chelper.topcoder.Message;
 import net.egork.chelper.util.CodeGenerationUtilities;
 import net.egork.chelper.util.FileUtilities;
 import net.egork.chelper.util.InputReader;
@@ -20,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.URL;
 import java.util.Properties;
 
@@ -70,7 +72,7 @@ public class TopCoderAction extends AnAction {
         try {
             if (serverSocket != null)
                 serverSocket.close();
-            /*serverSocket = new ServerSocket(CHelperArenaPlugin.PORT);
+            serverSocket = new ServerSocket(CHelperArenaPlugin.PORT);
             new Thread(new Runnable() {
                 private ServerSocket serverSocket;
 
@@ -123,7 +125,7 @@ public class TopCoderAction extends AnAction {
                         } catch (IOException ignored) {}
                     }
                 }
-            }).start();*/
+            }).start();
 		} catch (IOException e) {
             serverSocket = null;
         }

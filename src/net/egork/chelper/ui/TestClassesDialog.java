@@ -4,8 +4,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.IconLoader;
 import net.egork.chelper.util.FileCreator;
-import net.egork.chelper.util.Provider;
 import net.egork.chelper.util.Utilities;
+import net.egork.chelper.util.Provider;
 
 import javax.swing.*;
 import java.awt.*;

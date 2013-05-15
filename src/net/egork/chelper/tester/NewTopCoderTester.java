@@ -64,9 +64,7 @@ public class NewTopCoderTester {
         System.out.println("------------------------------------------------------------------");
 		int testNumber = 0;
         for (NewTopCoderTest test : tests) {
-			if (singleTest != -1 && testNumber++ != singleTest)
-				continue;
-			if (!test.active) {
+			if (singleTest != -1 && testNumber++ != singleTest || !test.active) {
 				verdicts.add(Verdict.SKIPPED);
 				System.out.println("Test #" + test.index + ": SKIPPED");
 				System.out.println("------------------------------------------------------------------");

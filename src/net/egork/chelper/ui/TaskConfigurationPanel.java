@@ -97,30 +97,30 @@ public class TaskConfigurationPanel extends JPanel {
         inputType.setSelectedItem(task.input.type);
         inputType.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                inputFileName.setVisible(inputType.getSelectedItem() == StreamConfiguration.StreamType.CUSTOM);
+				inputFileName.setVisible(((StreamConfiguration.StreamType)inputType.getSelectedItem()).hasStringParameter);
                 if (listener != null)
                     listener.onSizeChanged();
             }
         });
         basic.add(inputType);
-        inputFileName = new JTextField(task.input.type == StreamConfiguration.StreamType.CUSTOM ? task.input.fileName :
+        inputFileName = new JTextField(task.input.type.hasStringParameter ? task.input.fileName :
                 "input.txt");
-        inputFileName.setVisible(task.input.type == StreamConfiguration.StreamType.CUSTOM);
+        inputFileName.setVisible(task.input.type.hasStringParameter);
         basic.add(inputFileName);
         basic.add(new JLabel("Output:"));
-        outputType = new JComboBox(StreamConfiguration.StreamType.values());
+        outputType = new JComboBox(StreamConfiguration.OUTPUT_TYPES);
         outputType.setSelectedItem(task.output.type);
         outputType.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                outputFileName.setVisible(outputType.getSelectedItem() == StreamConfiguration.StreamType.CUSTOM);
+                outputFileName.setVisible(((StreamConfiguration.StreamType)outputType.getSelectedItem()).hasStringParameter);
                 if (listener != null)
                     listener.onSizeChanged();
             }
         });
         basic.add(outputType);
-        outputFileName = new JTextField(task.output.type == StreamConfiguration.StreamType.CUSTOM ?
+        outputFileName = new JTextField(task.output.type.hasStringParameter ?
                 task.output.fileName : "output.txt");
-        outputFileName.setVisible(task.output.type == StreamConfiguration.StreamType.CUSTOM);
+        outputFileName.setVisible(task.output.type.hasStringParameter);
         basic.add(outputFileName);
         tests = new JButton("Edit tests");
         tests.addActionListener(new ActionListener() {

@@ -34,23 +34,56 @@ public class Task {
     public final boolean failOnOverflow;
 
     public Task(String name, TestType testType, StreamConfiguration input, StreamConfiguration output, Test[] tests, String location, String vmArgs, String mainClass, String taskClass, String checkerClass, String checkerParameters, String[] testClasses, String date, String contestName, boolean truncate, String inputClass, String outputClass, boolean includeLocale, boolean failOnOverflow) {
-        this.name = name.trim();
+		if (name != null)
+        	this.name = name.trim();
+		else
+			this.name = null;
         this.testType = testType;
         this.input = input;
         this.output = output;
         this.tests = tests;
-        this.location = location.trim();
-        this.vmArgs = vmArgs.trim();
-        this.mainClass = mainClass.trim();
-        this.taskClass = taskClass.trim();
-        this.checkerClass = checkerClass.trim();
-        this.checkerParameters = checkerParameters.trim();
+		if (location != null)
+        	this.location = location.trim();
+		else
+			this.location = null;
+		if (vmArgs != null)
+        	this.vmArgs = vmArgs.trim();
+		else
+			this.vmArgs = null;
+		if (mainClass != null)
+        	this.mainClass = mainClass.trim();
+		else
+			this.mainClass = null;
+		if (taskClass != null)
+        	this.taskClass = taskClass.trim();
+		else
+			this.taskClass = null;
+		if (checkerClass != null)
+        	this.checkerClass = checkerClass.trim();
+		else
+			this.checkerClass = null;
+		if (checkerParameters != null)
+        	this.checkerParameters = checkerParameters.trim();
+		else
+			this.checkerParameters = null;
         this.testClasses = testClasses;
-        this.date = date.trim();
-        this.contestName = contestName.trim();
+		if (date != null)
+        	this.date = date.trim();
+		else
+			this.date = null;
+		if (contestName != null)
+        	this.contestName = contestName.trim();
+		else
+			this.contestName = null;
         this.truncate = truncate;
-        this.inputClass = inputClass.trim();
-        this.outputClass = outputClass.trim();
+		if (inputClass != null)
+        	this.inputClass = inputClass.trim();
+		else
+			this.inputClass = null;
+		if (outputClass != null)
+        	this.outputClass = outputClass.trim();
+		else
+			this.outputClass = null;
 		this.includeLocale = includeLocale;
         this.failOnOverflow = failOnOverflow;
     }

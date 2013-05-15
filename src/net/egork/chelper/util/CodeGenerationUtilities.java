@@ -129,11 +129,30 @@ public class CodeGenerationUtilities {
 			builder.append("\t\tLocale.setDefault(Locale.US);\n");
 		if (task.input.type == StreamConfiguration.StreamType.STANDARD)
 			builder.append("\t\tInputStream inputStream = System.in;\n");
-		else {
+		else if (task.input.type != StreamConfiguration.StreamType.LOCAL_REGEXP) {
 			builder.append("\t\tInputStream inputStream;\n");
 			builder.append("\t\ttry {\n");
 			builder.append("\t\t\tinputStream = new FileInputStream(\"").append(task.input.
 				getFileName(task.name, ".in")).append("\");\n");
+			builder.append("\t\t} catch (IOException e) {\n");
+			builder.append("\t\t\tthrow new RuntimeException(e);\n");
+			builder.append("\t\t}\n");
+		} else {
+			builder.append("\t\tInputStream inputStream;\n");
+			builder.append("\t\ttry {\n");
+			builder.append("\t\t\tfinal String regex = \"").append(task.input.fileName).append("\";\n");
+			builder.append("\t\t\tFile directory = new File(\".\");\n" +
+				"\t\t\tFile[] candidates = directory.listFiles(new FilenameFilter() {\n" +
+				"\t\t\t\tpublic boolean accept(File dir, String name) {\n" +
+				"\t\t\t\t\treturn name.matches(regex);\n" +
+				"\t\t\t\t}\n" +
+				"\t\t\t});\n" +
+				"\t\t\tFile toRun = null;\n" +
+				"\t\t\tfor (File candidate : candidates) {\n" +
+				"\t\t\t\tif (toRun == null || candidate.lastModified() > toRun.lastModified())\n" +
+				"\t\t\t\t\ttoRun = candidate;\n" +
+				"\t\t\t}\n" +
+				"\t\t\tinputStream = new FileInputStream(toRun);\n");
 			builder.append("\t\t} catch (IOException e) {\n");
 			builder.append("\t\t\tthrow new RuntimeException(e);\n");
 			builder.append("\t\t}\n");
@@ -196,6 +215,10 @@ public class CodeGenerationUtilities {
 					toImport.add("import java.io.FileInputStream;");
 				if (task.output.type != StreamConfiguration.StreamType.STANDARD)
 					toImport.add("import java.io.FileOutputStream;");
+				if (task.input.type == StreamConfiguration.StreamType.LOCAL_REGEXP) {
+					toImport.add("import java.io.File;");
+					toImport.add("import java.io.FilenameFilter;");
+				}
 				if (task.includeLocale)
 					toImport.add("import java.util.Locale;");
 				VirtualFile originalFile = FileUtilities.getFileByFQN(task.taskClass, project);
